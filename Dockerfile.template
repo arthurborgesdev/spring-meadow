@@ -1,4 +1,4 @@
-FROM resin/%%RESIN_MACHINE_NAME%%-node:6
+FROM resin/%%RESIN_MACHINE_NAME%%-node:6 AS buildstep
 
 ENV DEVICE_TYPE=%%RESIN_MACHINE_NAME%%
 
@@ -24,7 +24,8 @@ COPY bcm2835-1.52 /usr/src/app/bcm2835-1.52
 WORKDIR /usr/src/app/bcm2835-1.52
 
 #lapizero
-RUN ./configure
+#RUN ./configure
+RUN [“chmod”, “+x”, "configure”]
 RUN make
 RUN make install
 
@@ -39,6 +40,35 @@ RUN JOBS=MAX npm install --unsafe-perm --production \
 #RUN ./node_modules/.bin/bower --allow-root install \
 #	&& ./node_modules/.bin/bower --allow-root cache clean
 
-# FROM resin/%%RESIN_MACHINE_NAME%%-node:6-slim
+FROM resin/%%RESIN_MACHINE_NAME%%-node:6-slim
+
+WORKDIR /usr/src/app
+
+COPY --from=buildstep /usr/src/app/node_modules node_modules
+COPY --from=buildstep /usr/src/app/bcm2835-1.52 bcm2835-1.52
+
+RUN apt-get update \
+	&& apt-get install -y \
+	   pigpio \
+  && rm -rf /var/lib/apt/lists/*
+
+
+#lapizero
+ENV INITSYSTEM on
+ENV TZ=America/Sao_Paulo
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+COPY action.js /usr/src/app/
+COPY infrared.js /usr/src/app/
+COPY lapizero.js /usr/src/app/
+COPY led_module.js /usr/src/app/
+COPY pir.js /usr/src/app/
+COPY weather.js /usr/src/app/
+COPY wifi.js /usr/src/app/
+COPY socket-client.js /usr/src/app/
+
+COPY start /usr/src/app/
+
+#RUN ./node_modules/.bin/coffee -c ./src
 
 CMD bash start
