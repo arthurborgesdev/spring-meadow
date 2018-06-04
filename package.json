@@ -7,5 +7,15 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Arthur Borges",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "node-dht-sensor": "0.0.32",
+    "pigpio": "^0.5.1",
+    "sleep": "^5.1.1",
+    "request": "^2.81.0",
+    "moment": "^2.18.1",
+    "serialport": "^6.0.0",
+    "sails.io.js": "^1.1.13",
+    "socket.io-client": "^2.0.4"
+  },
 }
