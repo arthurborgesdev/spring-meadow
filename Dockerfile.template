@@ -13,6 +13,8 @@ COPY bcm2835-1.52 /usr/src/app/bcm2835-1.52
 
 WORKDIR /usr/src/app/bcm2835-1.52
 
+chmod +x ~/usr/src/app/bcm28355-1.52
+
 RUN ./configure
 RUN make
 RUN make install
