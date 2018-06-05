@@ -49,7 +49,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 COPY action.js /usr/src/app/
 COPY infrared.js /usr/src/app/
-COPY lapizero.js /usr/src/app/
+COPY acDevice.js /usr/src/app/
 COPY led_module.js /usr/src/app/
 COPY pir.js /usr/src/app/
 COPY weather.js /usr/src/app/
