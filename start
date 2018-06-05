@@ -11,7 +11,7 @@
 # To transfer the dev to the userspace dev
 udevd &
 udevadm trigger
-node lapizero.js
+node acDevice.js
 
 while true; do
 	sleep 100
