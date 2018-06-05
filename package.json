@@ -17,5 +17,5 @@
     "serialport": "^6.0.0",
     "sails.io.js": "^1.1.13",
     "socket.io-client": "^2.0.4"
-  },
+  }
 }
