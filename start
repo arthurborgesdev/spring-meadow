@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Commented because ssid and password are hardcoded now
+#export DBUS_SYSTEM_BUS_ADDRESS=unix:path=/host/run/dbus/system_bus_socket
+#sleep ${START_SLEEP:-30} # Delay needed to avoid DBUS introspection errors
+
+#Hardcoded ssid e password no system-connection folder para MVP
+#Depois debugar porque o rasp0w não alterna os scripts e o rust rwc não funciona
+#node src/app.js --clear=false
+
+# To transfer the dev to the userspace dev
+udevd &
+udevadm trigger
+node lapizero.js
+
+while true; do
+	sleep 100
+done
