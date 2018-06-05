@@ -4,28 +4,16 @@ ENV DEVICE_TYPE=%%RESIN_MACHINE_NAME%%
 
 RUN apt-get update \
 	&& apt-get install -y \
-#		dnsmasq \
-#		hostapd \
-#		iproute2 \
-#		iw \
-#		libdbus-1-dev \
-#		libexpat-dev \
-#		rfkill \
-#lapizero
     pigpio \
 	&& rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p /usr/src/app/bcm2835-1.52
 
-#lapizero
-
 COPY bcm2835-1.52 /usr/src/app/bcm2835-1.52
 
 WORKDIR /usr/src/app/bcm2835-1.52
 
-#lapizero
-#RUN ./configure
-RUN ["chmod", "+x", "./configure"]
+RUN ./configure
 RUN make
 RUN make install
 
