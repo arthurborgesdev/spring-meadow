@@ -46,6 +46,7 @@ exports.get = function(err, temperature, humidity) {
     */
     request.post("https://energizei-server.herokuapp.com/weather", requestForm, function(err, httpResponse, body) {
       if (err) console.log(err);
+      console.log(requestForm);
       //console.log(httpResponse);
       //console.log(body);
     })
