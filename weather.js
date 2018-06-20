@@ -32,26 +32,40 @@ exports.get = function(err, temperature, humidity) {
     lastHumid = humidity.toFixed(1);
     //(Aqui o weather já faz o post com o time_iso e com o device_id e com o
     // tipo da mensagem)
-    var requestForm = {
-      time_iso: moment().format(),
-      device_id: process.env.RESIN_DEVICE_UUID, // dev_id: process.env.RESIN_DEVICE_UUID,
-      msg_type: "sensorWeather",
-      temp: temperatureNow,
-      humid: humidityNow
-    };
-    /*
-    ?
-     implementar post sem usar sockets para server Sails
-      usar Https post
-    */
-    request.post("https://energizei-server.herokuapp.com/weather",
-      moment().format(), function(err, httpResponse, body) {
-        if (err) console.log(err);
-        console.log(requestForm);
-        //console.log(httpResponse);
-        //console.log(body);
-    })
 
+    function postWeather() {
+      var requestForm = {
+        time_iso: moment().format(),
+        device_id: process.env.RESIN_DEVICE_UUID, // dev_id: process.env.RESIN_DEVICE_UUID,
+        msg_type: "sensorWeather",
+        temp: temperatureNow,
+        humid: humidityNow
+      };
+      /*
+      ?
+       implementar post sem usar sockets para server Sails
+        usar Https post
+      */
+      request.post({
+        url: "https://energizei-server.herokuapp.com/weather",
+        form: requestForm
+      }, postResponse)
+      .on('error', function(e) {
+        console.log(e);
+      });
+    }
+
+    function postResponse (error, response, body) {
+      if (error) console.log(error);
+      if (response) {
+        console.log(response.statusCode);
+        if (response.statusCode == 200) {
+          console.log(body); // Servidor recebeu o pedido
+        }
+      }
+    }
+
+    postWeather();
 
     /* (Função antiga, na época do servidor em Sails)
     io.socket.post('/data', requestForm, function serverResponded (body, JWR) {
