@@ -44,11 +44,12 @@ exports.get = function(err, temperature, humidity) {
      implementar post sem usar sockets para server Sails
       usar Https post
     */
-    request.post("https://energizei-server.herokuapp.com/weather", requestForm, function(err, httpResponse, body) {
-      if (err) console.log(err);
-      console.log(requestForm);
-      //console.log(httpResponse);
-      //console.log(body);
+    request.post("https://energizei-server.herokuapp.com/weather",
+      moment().format(), function(err, httpResponse, body) {
+        if (err) console.log(err);
+        console.log(requestForm);
+        //console.log(httpResponse);
+        //console.log(body);
     })
 
 
