@@ -1,3 +1,7 @@
+//?
+// pir está desconectado
+// reconectá-lo para testar o código
+
 var serverURL = "http://165.227.192.69:1337"; // --> put inside a config or use env var later
 
 const moment = require('moment');
@@ -20,9 +24,13 @@ exports.receive = function() {
 
 var nobodyAlert = function() {
   // Implementar aqui a função de mandar post pro server
+  // aparentemente está implementada
   postPir();
   console.log("Nobody is home!");
 }
+
+// ?
+//  two function are to post data to server
 
 function postPir() {
   var pirForm = {

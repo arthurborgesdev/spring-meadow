@@ -38,8 +38,8 @@ exports.blink = function() {
 
 //li
 // li
-//
-// (Aqui acende o led e o apaga após meio segundo)
+//?
+//  (Aqui acende o led e o apaga após meio segundo)
 exports.blinkOnce = function() {
   led.digitalWrite(1);
   setTimeout(function() {

@@ -25,7 +25,7 @@ exports.get = function(err, temperature, humidity) {
   // do range das last Temp e Humid
   if( (temperatureNow*10 > (lastTemp*10 + 2)) || (temperatureNow*10 < (lastTemp*10 - 2)) ||
       (humidityNow*10 > (lastHumid*10 + 5)) || (humidityNow*10 < (lastHumid*10 - 5))  ) {
-      // (Aqui o range é de 0,2 graus para temperatura e de 0,5 para umidade)
+      // (Aqui o range é de 0.2 graus para temperatura e de 0.5 para umidade)
 
 
     lastTemp = temperature.toFixed(1);
@@ -45,6 +45,8 @@ exports.get = function(err, temperature, humidity) {
       ?
        implementar post sem usar sockets para server Sails
         usar Https post
+      done
+       (13h17 - 20/06/2018)
       */
       request.post({
         url: "https://energizei-server.herokuapp.com/weather",
