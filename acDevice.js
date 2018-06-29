@@ -129,15 +129,22 @@ button.on('interrupt', function() {
 
 // ---------------- PIR LISTENER ------------------------------
 
+/*
+setTimeout(function() {
+  pirSensor.on('interrupt', function() {
+    //console.log("Interrompeu!");
+    if(!lockAll) {
+      console.log("não está travado");
+      pir.receive();
+    }
+  });
+}, 60000);
+*/
 
-pirSensor.on('interrupt', function() {
-  //console.log("Interrompeu!");
-  if(!lockAll) {
-    console.log("não está travado");
-    pir.receive();
-  }
-});
-
+setTimeout(function() {
+  var pirStatus = pirSensor.digitalRead();
+  console.log(pirStatus);
+}, 2000);
 
 // ---------------- RECEIVE IR --------------------------------
 
