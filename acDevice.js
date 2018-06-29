@@ -89,8 +89,8 @@ io.socket.on('disconnect', function() {
 
 // ----------- DEBUG LED -----------------------------------
 // When LED is blinking, the lapizero is working
-// var ledInterval;
-// led_module.blink();
+var ledInterval;
+led_module.blink();
 
 // ----------- WEATHER HANDLING -----------------------------------
 
