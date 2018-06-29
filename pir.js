@@ -25,13 +25,13 @@ exports.receive = function() {
 var nobodyAlert = function() {
   // Implementar aqui a função de mandar post pro server
   // aparentemente está implementada
-  postPir();
+  //postPir();
   console.log("Nobody is home!");
 }
 
 // ?
 //  two function are to post data to server
-
+/*
 function postPir() {
   var pirForm = {
     time_iso: moment().format(),
@@ -58,3 +58,4 @@ function pirResponse (error, response, body) {
     }
   }
 }
+*/
