@@ -224,7 +224,7 @@ setInterval(function() {
     console.log("Sent first part");
   });
 
-}, 10 * 60 * 1000); //  10 minutos
+}, 30 * 1 * 1000); //  10 minutos
 
 
 parser.on('data', function(data) {

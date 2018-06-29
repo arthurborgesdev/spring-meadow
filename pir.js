@@ -40,7 +40,8 @@ function postPir() {
     state: true
   };
   request.post({
-    url: serverURL + '/data',
+    //url: serverURL + '/data',
+    url: "https://energizei-server.herokuapp.com/weather",
     form: pirForm
   }, pirResponse)
   .on('error', function(e) {
