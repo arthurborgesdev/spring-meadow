@@ -217,7 +217,7 @@ setInterval(function() {
             //  00110000100011010011001100000001000000000000001001000001000000111100000010000000000000000000000000000000000000010110010
 
 
-  signalArray = infrared.createSignalArray(signal);
+  signalArray = infrared.createSignalArray(signalPequiDesliga);
   console.log(signalArray);
 
   port.write(signalArray[arrayIndex], function(err) {
