@@ -49,7 +49,8 @@ var receiver = new Gpio(21, {
 var pirSensor = new Gpio(12, {
   mode: Gpio.INPUT,
   pullUpDown: Gpio.PUD_UP,
-  edge: Gpio.FALLING_EDGE
+  edge: Gpio.FALLING_EDGE,
+  alert: true
 });
 
 var lockAll = false;
@@ -89,8 +90,8 @@ io.socket.on('disconnect', function() {
 
 // ----------- DEBUG LED -----------------------------------
 // When LED is blinking, the lapizero is working
-var ledInterval;
-led_module.blink();
+//var ledInterval;
+//led_module.blink();
 
 // ----------- WEATHER HANDLING -----------------------------------
 
