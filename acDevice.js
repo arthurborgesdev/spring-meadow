@@ -50,7 +50,6 @@ var pirSensor = new Gpio(12, {
   mode: Gpio.INPUT,
   pullUpDown: Gpio.PUD_UP,
   edge: Gpio.FALLING_EDGE,
-  alert: true
 });
 
 var lockAll = false;
@@ -59,6 +58,7 @@ var lockAll = false;
 
 // ----------- SELF REGISTER DEVICE ONCE ---------------------
 
+/* -- FAZ SENTIDO APENAS COM COMUNICAÇÃO VIA SOCKETS
 setTimeout(function() {
   // trocar pra servidor próprio
   // Verificar aqui se já foi registrado no banco Sails
@@ -70,6 +70,8 @@ setTimeout(function() {
     });
   }
 }, 1);
+
+
 
 io.socket.on('disconnect', function() {
   // why use _ /parameters/variables and how they work?
@@ -85,6 +87,7 @@ io.socket.on('disconnect', function() {
   io.socket._raw.io._reconnectionAttempts = Infinity;
 });
 
+*/
 // ----------- SELF REGISTER DEVICE ONCE --------------------//
 
 
@@ -130,7 +133,7 @@ button.on('interrupt', function() {
 
 // ---------------- PIR LISTENER ------------------------------
 
-/*
+/* ---- JEITO 1 de fazer
 setTimeout(function() {
   pirSensor.on('interrupt', function() {
     //console.log("Interrompeu!");
@@ -142,10 +145,20 @@ setTimeout(function() {
 }, 60000);
 */
 
+/* --- JEITO 2 de fazer
 setTimeout(function() {
   var pirStatus = pirSensor.digitalRead();
   console.log(pirStatus);
 }, 2000);
+*/
+
+// JEITO 3 de fazer
+// Aqui o sensor está sempre alto, ficando baixo apenas quando não identifica
+// ninguém no estabelecimento.
+pirSensor.on('interrupt', function() {
+  console.log("Nível desceu, não tem ninguém");
+  //pir.receive();
+});
 
 // ---------------- RECEIVE IR --------------------------------
 
