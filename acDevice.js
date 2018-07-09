@@ -48,8 +48,8 @@ var receiver = new Gpio(21, {
 
 var pirSensor = new Gpio(12, {
   mode: Gpio.INPUT,
-  pullUpDown: Gpio.PUD_UP,
-  edge: Gpio.FALLING_EDGE,
+  pullUpDown: Gpio.PUD_DOWN,
+  edge: Gpio.RISING_EDGE,
 });
 
 var lockAll = false;
@@ -156,7 +156,7 @@ setTimeout(function() {
 // Aqui o sensor está sempre alto, ficando baixo apenas quando não identifica
 // ninguém no estabelecimento.
 pirSensor.on('interrupt', function() {
-  console.log("Nível desceu, não tem ninguém");
+  console.log("Nível subiu, tem alguém");
   //pir.receive();
 });
 
