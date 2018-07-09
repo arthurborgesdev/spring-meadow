@@ -157,6 +157,8 @@ setTimeout(function() {
 // ninguém no estabelecimento.
 setInterval(function() {
   led_module.blinkParam(pirSensor.digitalRead());
+  console.log("Esse é a leitura do pir: ");
+  console.log(pirSensor.digitalRead());
 }, 1000);
 
 
