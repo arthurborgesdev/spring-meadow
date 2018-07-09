@@ -48,7 +48,7 @@ var receiver = new Gpio(21, {
 
 var pirSensor = new Gpio(12, {
   mode: Gpio.INPUT,
-  pullUpDown: Gpio.PUD_DOWN,
+  pullUpDown: Gpio.PUD_UP,
   edge: Gpio.RISING_EDGE,
 });
 
