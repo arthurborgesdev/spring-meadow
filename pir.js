@@ -16,7 +16,7 @@ exports.receive = function() {
   led_module.blinkOnce();
   /*
   //console.log(nobodyTimer);  // debug why timer not fired
- 
+
 
 
 
@@ -63,5 +63,5 @@ function pirResponse (error, response, body) {
       console.log(body); // Servidor recebeu o pedido
     }
   }
-}
 */
+}
