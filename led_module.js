@@ -47,3 +47,7 @@ exports.blinkOnce = function() {
     clearTimeout(ledTimeout);
   }, 500);
 }
+
+exports.blinkParam = function(param) {
+  led.digitalWrite(param);
+}

@@ -155,11 +155,18 @@ setTimeout(function() {
 // JEITO 3 de fazer
 // Aqui o sensor está sempre alto, ficando baixo apenas quando não identifica
 // ninguém no estabelecimento.
+setInterval(function() {
+  led_module.blinkParam(pirSensor.digitalRead());
+}, 1000);
+
+
+/*
 pirSensor.on('interrupt', function() {
   console.log("Nível subiu, tem alguém");
-  pir.receive();
-});
 
+  //pir.receive();
+});
+*/
 // ---------------- RECEIVE IR --------------------------------
 
 
