@@ -157,7 +157,7 @@ setTimeout(function() {
 // ninguém no estabelecimento.
 pirSensor.on('interrupt', function() {
   console.log("Nível subiu, tem alguém");
-  //pir.receive();
+  pir.receive();
 });
 
 // ---------------- RECEIVE IR --------------------------------

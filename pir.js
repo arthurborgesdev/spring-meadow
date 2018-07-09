@@ -9,12 +9,18 @@ const request = require('request');
 const led_module = require('./led_module');
 
 var nobodyTime = 60000; // inicial 720 000 ms = 12 min | testes 180 000 ms = 3 min
-var nobodyTimer;
+var nobodyTimer; // aparece inicialmente como undefined
 
 exports.receive = function() {
   //console.log("Estou dentro da função pir.receive");
   led_module.blinkOnce();
+  /*
   //console.log(nobodyTimer);  // debug why timer not fired
+ 
+
+
+
+
   if(nobodyTimer) {
     clearTimeout(nobodyTimer); // zera o timer caso PIR acionar de novo
   }
@@ -28,7 +34,7 @@ var nobodyAlert = function() {
   //postPir();
   console.log("Nobody is home!");
 }
-
+*/
 // ?
 //  two function are to post data to server
 /*
