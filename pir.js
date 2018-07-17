@@ -70,6 +70,7 @@ exports.receive = function() {
   if(nobodyTimer) {
     clearTimeout(nobodyTimer); // zera o timer caso PIR acionar de novo
   }
+  console.log(nobodyTimer); // to debug why the nobodyAlert didnt fired
   // crie o timer ou recrie-o com o nobodyTime passado como parâmetro
   // fires when people isn't in room after specified time
   nobodyTimer = setTimeout(nobodyAlert, nobodyTime);
