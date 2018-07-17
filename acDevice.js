@@ -152,7 +152,7 @@ setTimeout(function() {
 }, 2000);
 */
 
-// JEITO 3 de fazer
+/* JEITO 3 de fazer
 // Aqui o sensor está sempre alto, ficando baixo apenas quando não identifica
 // ninguém no estabelecimento.
 setInterval(function() {
@@ -160,6 +160,19 @@ setInterval(function() {
   console.log("Esse é a leitura do pir: ");
   console.log(pirSensor.digitalRead());
 }, 1000);
+*/
+
+/* JEITO 4 de fazer
+ Aqui o sensor está sempre baixo, ficando alto
+ apenas quando identifica presença. Assim, o sinal fica 3 segundos alto
+ e depois fica baixo por 3 segundos de intervalo até outra detecção.
+*/
+pirSensor.on('interrupt', function() {
+  led_module.blinkParam(pirSensor.digitalRead());
+  console.log("Presença detectada!");
+  console.log(pirSensor.digitalRead());
+  pir.receive();
+});
 
 
 /*
@@ -256,7 +269,7 @@ setInterval(function() {
     console.log("Sent first part");
   });
 
-}, 30 * 1 * 1000); //  10 minutos
+}, 30 * 1 * 1000); //  30 segundos
 
 
 parser.on('data', function(data) {
