@@ -110,4 +110,3 @@ function pirResponse (error, response, body) {
     }
   }
 */
-}
