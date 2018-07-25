@@ -196,7 +196,7 @@ pirSensor.on('interrupt', function() {
     console.log(pirSensor.digitalRead());
     var anotherDownLevelTime = moment().format();
     console.log("The first Down Level Time is: ");
-    console.log(firstDownLevelTime);
+    console.log(tickMoment);
     console.log("Another Down Level Time is: ");
     console.log(anotherDownLevelTime);
   }
