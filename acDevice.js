@@ -168,9 +168,9 @@ setInterval(function() {
  apenas quando identifica presença. Assim, o sinal fica 3 segundos alto
  e depois fica baixo por 3 segundos de intervalo até outra detecção.
 */
-
+var tickMoment;
 setTimeout(function(){
-  var tickMoment = moment().format();
+  tickMoment = moment().format();
 }, 1000);
 
 
