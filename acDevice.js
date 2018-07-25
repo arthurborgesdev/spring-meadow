@@ -10,6 +10,7 @@ const infrared = require('./infrared');
 const pir = require('./pir');
 const action = require('./action');
 const sleep = require('sleep');
+const moment = require('moment');
 
 const io = require('./socket-client').io;
 io.sails.url = 'https://www.energizei.com.br';
@@ -167,11 +168,18 @@ setInterval(function() {
  apenas quando identifica presença. Assim, o sinal fica 3 segundos alto
  e depois fica baixo por 3 segundos de intervalo até outra detecção.
 */
+
+var firstDownLevelTime = moment().format();
 pirSensor.on('interrupt', function() {
   led_module.blinkParam(pirSensor.digitalRead());
   console.log("Presença detectada!");
   console.log(pirSensor.digitalRead());
-  pir.receive();
+  //pir.receive();
+  var anotherDownLevelTime = moment().format();
+  console.log("The first Down Level Time is: ");
+  console.log(firstDownLevelTime);
+  console.log("Another Down Level Time is: ");
+  console.log(anotherDownLevelTime);
 });
 
 
