@@ -170,16 +170,21 @@ setInterval(function() {
 */
 
 var firstDownLevelTime = moment().format();
+
 pirSensor.on('interrupt', function() {
   led_module.blinkParam(pirSensor.digitalRead());
-  console.log("Presença detectada!");
-  console.log(pirSensor.digitalRead());
+  if (pirSensor.digitalRead() == 0 || pirSensor.digitalRead() == "0") {
+    console.log("Presença detectada!");
+    console.log(pirSensor.digitalRead());
+    var anotherDownLevelTime = moment().format();
+    console.log("The first Down Level Time is: ");
+    console.log(firstDownLevelTime);
+    console.log("Another Down Level Time is: ");
+    console.log(anotherDownLevelTime);
+  }
+
   //pir.receive();
-  var anotherDownLevelTime = moment().format();
-  console.log("The first Down Level Time is: ");
-  console.log(firstDownLevelTime);
-  console.log("Another Down Level Time is: ");
-  console.log(anotherDownLevelTime);
+
 });
 
 
