@@ -169,11 +169,29 @@ setInterval(function() {
  e depois fica baixo por 3 segundos de intervalo até outra detecção.
 */
 
-var firstDownLevelTime = moment().format();
+setTimeout(function(){
+  var tickMoment = moment().format();
+}, 1000);
+
 
 pirSensor.on('interrupt', function() {
   led_module.blinkParam(pirSensor.digitalRead());
-  if (pirSensor.digitalRead() == 1 || pirSensor.digitalRead() == "1") {
+  // Toda vez que detectar presença, ele roda esse bloco de if
+  /*
+  O que preciso monitorar aqui é o tempo "sem gente", que é a parte
+  importante para essa função: o usuário irá setar
+  a quantidade de tempo sem gente (em minutos) para o ar
+  condicionado desligar.
+
+  Pode ser pensado uma outra coisa: uma função intervalo fora do
+  pirSensor ficar atualizando uma variável, contendo a hora, a
+  cada segundo.
+
+  Tarefa pra próxima seção: Por que o if está detectando se o
+  digitalRead é igual a 0?
+
+  */
+  if (pirSensor.digitalRead() == 0 || pirSensor.digitalRead() == "0") {
     console.log("Presença detectada!");
     console.log(pirSensor.digitalRead());
     var anotherDownLevelTime = moment().format();
