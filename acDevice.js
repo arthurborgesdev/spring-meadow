@@ -169,7 +169,7 @@ setInterval(function() {
  e depois fica baixo por 3 segundos de intervalo até outra detecção.
 */
 var tickMoment;
-setTimeout(function(){
+setInterval(function(){
   tickMoment = moment().format();
 }, 1000);
 
