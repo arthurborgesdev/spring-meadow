@@ -173,7 +173,7 @@ var firstDownLevelTime = moment().format();
 
 pirSensor.on('interrupt', function() {
   led_module.blinkParam(pirSensor.digitalRead());
-  if (pirSensor.digitalRead() == 0 || pirSensor.digitalRead() == "0") {
+  if (pirSensor.digitalRead() == 1 || pirSensor.digitalRead() == "1") {
     console.log("Presença detectada!");
     console.log(pirSensor.digitalRead());
     var anotherDownLevelTime = moment().format();
