@@ -168,10 +168,30 @@ setInterval(function() {
  apenas quando identifica presença. Assim, o sinal fica 3 segundos alto
  e depois fica baixo por 3 segundos de intervalo até outra detecção.
 */
+
+/*
+ Essa variável tickMoment fica sempre atualizada, a cada segundo ela é
+ incrementada. Diferente da variável anotherDownLevelTime, que só é
+ atualizada quando o sensor ativar (detectar presença). A diferença
+ entre as duas variáveis é o tempo setado de intervalo. Assim:
+ Se o tempo atual menos o tempo do sensor for maior que o tempo setado,
+ então execute a função (Desligue o ar condicionado)
+
+ SE (tickMoment - anotherDownLevelTime) > Tempo setado {
+  Desligue o ar
+ }
+
+ Se (18h45 - 18h00) > 15 min (SIM!!!) {
+  Desligue o ar  
+ }
+
+
+*/
 var tickMoment;
 setInterval(function(){
   tickMoment = moment().format();
 }, 1000);
+
 
 
 pirSensor.on('interrupt', function() {
