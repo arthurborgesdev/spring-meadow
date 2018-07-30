@@ -187,6 +187,8 @@ setInterval(function() {
 
 
 */
+
+var anotherDownLevelTime;
 var tickMoment;
 setInterval(function(){
   // praticamente fica gravando a hora atual dentro de tickMoment
@@ -219,7 +221,7 @@ pirSensor.on('interrupt', function() {
   if (pirSensor.digitalRead() == 1 || pirSensor.digitalRead() == "1") {
     console.log("Presença detectada!");
     console.log(pirSensor.digitalRead());
-    var anotherDownLevelTime = moment().format();
+    anotherDownLevelTime = moment().format();
     console.log("The first Down Level Time is: ");
     console.log(tickMoment);
     console.log("Another Down Level Time is: ");
