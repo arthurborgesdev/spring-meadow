@@ -188,8 +188,8 @@ setInterval(function() {
 
 */
 // Inicializar as variáveis pra evitar erro NaN
-var anotherDownLevelTime = Date.now();
-var tickMoment = Date.now();
+var anotherDownLevelTime = 0;
+var tickMoment = 0;
 setInterval(function(){
   // praticamente fica gravando a hora atual dentro de tickMoment
   tickMoment = Date.now() / 1000; // transform milli to second
