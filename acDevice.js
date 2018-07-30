@@ -182,14 +182,19 @@ setInterval(function() {
  }
 
  Se (18h45 - 18h00) > 15 min (SIM!!!) {
-  Desligue o ar  
+  Desligue o ar
  }
 
 
 */
 var tickMoment;
 setInterval(function(){
+  // praticamente fica gravando a hora atual dentro de tickMoment
   tickMoment = moment().format();
+  // aqui eu tiro a diferença entre as duas, pra depois comparar
+  // depois se ela é maior que o tempo setado (15 minutos)
+  console.log(tickMoment - anotherDownLevelTime);
+  // se essa comparação não der, usar millisTime
 }, 1000);
 
 
