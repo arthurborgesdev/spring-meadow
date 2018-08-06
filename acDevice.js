@@ -203,8 +203,8 @@ setInterval(function(){
   console.log(tickMoment - anotherDownLevelTime);
   if (tickMoment - anotherDownLevelTime > tempoForaDaSala) {
     console.log("DESLIGUE O ARRRRR!!!!!!!!!");
+    anotherDownLevelTime = Date.now(); // "zera o time da queda do nível lógico do sensor PIR"
   }
-  // se essa comparação não der, usar millisTime
 }, 1000);
 
 
