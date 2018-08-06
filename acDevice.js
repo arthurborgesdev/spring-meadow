@@ -192,9 +192,12 @@ var anotherDownLevelTime = 0;
 var tickMoment = 0;
 setInterval(function(){
   // praticamente fica gravando a hora atual dentro de tickMoment
-  tickMoment = Date.now() / 1000; // transform milli to second
+  tickMoment = Math.round(Date.now() / 1000); // transform milli to second
   // aqui eu tiro a diferença entre as duas, pra depois comparar
   // depois se ela é maior que o tempo setado (15 minutos)
+  // ?
+  //  aqui o tempo pego é o da unix Epoch, ou seja, sempre maior
+  //  que 15 minutos
   console.log(tickMoment - anotherDownLevelTime);
   // se essa comparação não der, usar millisTime
 }, 1000);
@@ -221,7 +224,7 @@ pirSensor.on('interrupt', function() {
   if (pirSensor.digitalRead() == 1 || pirSensor.digitalRead() == "1") {
     console.log("Presença detectada!");
     console.log(pirSensor.digitalRead());
-    anotherDownLevelTime = Date.now() / 1000; // transform milli to second
+    anotherDownLevelTime = Math.round(Date.now()); // transform milli to second
     console.log("The first Down Level Time is: ");
     console.log(tickMoment);
     console.log("Another Down Level Time is: ");
