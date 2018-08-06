@@ -190,15 +190,20 @@ setInterval(function() {
 // Inicializar as variáveis pra evitar erro NaN
 var anotherDownLevelTime = 0;
 var tickMoment = 0;
+// var tempoForaDaSala precisa ser setada via variável de ambiente
+var tempoForaDaSala = 3 * 60 * 1000 // 3 minutos em milisegundos (TESTE)
 setInterval(function(){
   // praticamente fica gravando a hora atual dentro de tickMoment
-  tickMoment = Math.round(Date.now()); // transform milli to second
+  tickMoment = Date.now(); // transform milli to second
   // aqui eu tiro a diferença entre as duas, pra depois comparar
   // depois se ela é maior que o tempo setado (15 minutos)
   // ?
   //  aqui o tempo pego é o da unix Epoch, ou seja, sempre maior
   //  que 15 minutos
   console.log(tickMoment - anotherDownLevelTime);
+  if (tickMoment - anotherDownLevelTime > tempoForaDaSala) {
+    console.log("DESLIGUE O ARRRRR!!!!!!!!!");
+  }
   // se essa comparação não der, usar millisTime
 }, 1000);
 
@@ -206,25 +211,17 @@ setInterval(function(){
 
 pirSensor.on('interrupt', function() {
   led_module.blinkParam(pirSensor.digitalRead());
-  // Toda vez que detectar presença, ele roda esse bloco de if
   /*
   O que preciso monitorar aqui é o tempo "sem gente", que é a parte
   importante para essa função: o usuário irá setar
   a quantidade de tempo sem gente (em minutos) para o ar
   condicionado desligar.
 
-  Pode ser pensado uma outra coisa: uma função intervalo fora do
-  pirSensor ficar atualizando uma variável, contendo a hora, a
-  cada segundo.
-
-  Tarefa pra próxima seção: Por que o if está detectando se o
-  digitalRead é igual a 0?
-
   */
   if (pirSensor.digitalRead() == 1 || pirSensor.digitalRead() == "1") {
     console.log("Presença detectada!");
     console.log(pirSensor.digitalRead());
-    anotherDownLevelTime = Math.round(Date.now()); // transform milli to second
+    anotherDownLevelTime = Date.now();
     console.log("The first Down Level Time is: ");
     console.log(tickMoment);
     console.log("Another Down Level Time is: ");
