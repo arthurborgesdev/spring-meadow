@@ -192,7 +192,7 @@ var anotherDownLevelTime = 0;
 var tickMoment = 0;
 setInterval(function(){
   // praticamente fica gravando a hora atual dentro de tickMoment
-  tickMoment = Math.round(Date.now() / 1000); // transform milli to second
+  tickMoment = Math.round(Date.now()); // transform milli to second
   // aqui eu tiro a diferença entre as duas, pra depois comparar
   // depois se ela é maior que o tempo setado (15 minutos)
   // ?
