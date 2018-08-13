@@ -3,9 +3,16 @@ FROM resin/%%RESIN_MACHINE_NAME%%-node:6 AS buildstep
 ENV DEVICE_TYPE=%%RESIN_MACHINE_NAME%%
 
 RUN apt-get update \
-	&& apt-get install -y \
+	&& apt-get install -y dnsmasq wireless-tools \
     pigpio \
 	&& rm -rf /var/lib/apt/lists/*
+
+RUN curl https://api.github.com/repos/resin-io/resin-wifi-connect/releases/latest -s \
+    | grep -hoP 'browser_download_url": "\K.*%%RESIN_ARCH%%\.tar\.gz' \
+    | xargs -n1 curl -Ls \
+    | tar -xvz -C /usr/src/app/
+
+COPY scripts/start.sh .
 
 RUN mkdir -p /usr/src/app/bcm2835-1.52
 
@@ -37,7 +44,7 @@ COPY --from=buildstep /usr/src/app/node_modules node_modules
 COPY --from=buildstep /usr/src/app/bcm2835-1.52 bcm2835-1.52
 
 RUN apt-get update \
-	&& apt-get install -y dnsmasq wireless-tools\
+	&& apt-get install -y \
 	   pigpio \
   && rm -rf /var/lib/apt/lists/*
 
@@ -46,13 +53,6 @@ RUN apt-get update \
 ENV INITSYSTEM on
 ENV TZ=America/Sao_Paulo
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-
-RUN curl https://api.github.com/repos/resin-io/resin-wifi-connect/releases/latest -s \
-    | grep -hoP 'browser_download_url": "\K.*%%RESIN_ARCH%%\.tar\.gz' \
-    | xargs -n1 curl -Ls \
-    | tar -xvz -C /usr/src/app/
-
-COPY scripts/start.sh .
 
 COPY action.js /usr/src/app/
 COPY infrared.js /usr/src/app/
