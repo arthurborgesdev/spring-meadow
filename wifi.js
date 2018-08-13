@@ -1,3 +1,7 @@
+// o botão pra setar o wifi invoca esse pedaço de código, spawnando
+// um child adicional para chamar o script chg-wifi.sh o qual é
+// responsável por 
+
 const { spawn } = require('child_process');
 
 exports.set = function() {

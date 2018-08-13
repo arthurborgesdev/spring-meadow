@@ -12,8 +12,9 @@ const action = require('./action');
 const sleep = require('sleep');
 const moment = require('moment');
 
-const io = require('./socket-client').io;
-io.sails.url = 'https://www.energizei.com.br';
+// Part to communicate with sockets
+// const io = require('./socket-client').io;
+// io.sails.url = 'https://www.energizei.com.br';
 
 // Part to communicate with Arduino
 const SerialPort = require('serialport');
@@ -33,13 +34,13 @@ port.pipe(parser);
 
 // ----------- PERIPHERAL DEVICES --------------
 
-/*
+
 var button = new Gpio(24, {
   mode: Gpio.INPUT,
   pullUpDown: Gpio.PUD_DOWN,
   edge: Gpio.EITHER_EDGE
 });
-*/
+
 var receiver = new Gpio(21, {
   mode: Gpio.INPUT,
   pullUpDown: Gpio.PUD_UP,
@@ -117,6 +118,13 @@ setInterval(function() {
 
 // testar essa function com resin local para agilizar
 /*
+ li
+  ?
+   por que lockButton está setado como false?
+   e porque lockAll é setado como true?
+   tem a ver com debounce? --> Não
+   Tem a ver com destravar ou não os periféricos (sensor de presença,
+   de umidade e temperatura, etc)
 var lockButton = false;
 button.on('interrupt', function() {
   lockAll = true;
@@ -130,6 +138,23 @@ button.on('interrupt', function() {
   }
 });
 */
+
+// JEITO 1 de se fazer o botão:
+
+var lockButton = false; // variavel global para armazenar estado do botao
+button.on('interrupt', function() {
+  lockAll = true; // trava todos os perifericos (flag)
+  if (!lockButton) {
+    lockButton = true; // pra que setar o lockButton como true??
+    wifi.set(); // buscar explicações em wifi.set()
+    setTimeout(function() {
+    //setInterval(function() {
+      lockAll = false;
+    }, 120000); // destrava os periféricos após 2 minutos
+  }
+});
+
+
 // ---------------- BUTTON LISTENER ---------------------------//
 
 // ---------------- PIR LISTENER ------------------------------
@@ -193,17 +218,20 @@ var tickMoment = 0;
 // var tempoForaDaSala precisa ser setada via variável de ambiente
 var tempoForaDaSala = 3 * 60 * 1000 // 3 minutos em milisegundos (TESTE)
 setInterval(function(){
-  // praticamente fica gravando a hora atual dentro de tickMoment
-  tickMoment = Date.now(); // transform milli to second
-  // aqui eu tiro a diferença entre as duas, pra depois comparar
-  // depois se ela é maior que o tempo setado (15 minutos)
-  // ?
-  //  aqui o tempo pego é o da unix Epoch, ou seja, sempre maior
-  //  que 15 minutos
-  console.log(tickMoment - anotherDownLevelTime);
-  if (tickMoment - anotherDownLevelTime > tempoForaDaSala) {
-    console.log("DESLIGUE O ARRRRR!!!!!!!!!");
-    anotherDownLevelTime = Date.now(); // "zera o time da queda do nível lógico do sensor PIR"
+  // se o botão estiver apertado, esse bloco não roda
+  if (!lockAll) {
+    // praticamente fica gravando a hora atual dentro de tickMoment
+    tickMoment = Date.now(); // transform milli to second
+    // aqui eu tiro a diferença entre as duas, pra depois comparar
+    // depois se ela é maior que o tempo setado (15 minutos)
+    // ?
+    //  aqui o tempo pego é o da unix Epoch, ou seja, sempre maior
+    //  que 15 minutos
+    console.log(tickMoment - anotherDownLevelTime);
+    if (tickMoment - anotherDownLevelTime > tempoForaDaSala) {
+      console.log("DESLIGUE O ARRRRR!!!!!!!!!");
+      anotherDownLevelTime = Date.now(); // "zera o time da queda do nível lógico do sensor PIR"
+    }
   }
 }, 1000);
 
