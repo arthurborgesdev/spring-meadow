@@ -140,20 +140,27 @@ button.on('interrupt', function() {
 */
 
 // JEITO 1 de se fazer o botão:
+/*
+ Atualização! Ao usar a nova versão do resin wifi connect, a aplicação
+ passa a funcionar sem a necessidade do botão, pois inicia ANTES da aplicação
+ principal. Portanto, o principal agora é testar a funcionalidade do RWC e deixar
+ o botão para quando for necessário (Alguma interface com o frontend, por exemplo)
+
+
 
 var lockButton = false; // variavel global para armazenar estado do botao
 button.on('interrupt', function() {
   lockAll = true; // trava todos os perifericos (flag)
   if (!lockButton) {
     lockButton = true; // pra que setar o lockButton como true??
-    wifi.set(); // buscar explicações em wifi.set()
+    //wifi.set(); // buscar explicações em wifi.set()
     setTimeout(function() {
     //setInterval(function() {
       lockAll = false;
     }, 120000); // destrava os periféricos após 2 minutos
   }
 });
-
+*/
 
 // ---------------- BUTTON LISTENER ---------------------------//
 

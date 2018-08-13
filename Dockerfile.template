@@ -7,14 +7,14 @@ RUN apt-get update \
     pigpio \
 	&& rm -rf /var/lib/apt/lists/*
 
-WORKDIR /usr/src/app/
+#WORKDIR /usr/src/app/
 
-RUN curl https://api.github.com/repos/resin-io/resin-wifi-connect/releases/latest -s \
+#RUN curl https://api.github.com/repos/resin-io/resin-wifi-connect/releases/latest -s \
     | grep -hoP 'browser_download_url": "\K.*%%RESIN_ARCH%%\.tar\.gz' \
     | xargs -n1 curl -Ls \
     | tar -xvz -C /usr/src/app/
 
-COPY scripts/start.sh .
+#COPY scripts/start.sh .
 
 RUN mkdir -p /usr/src/app/bcm2835-1.52
 
