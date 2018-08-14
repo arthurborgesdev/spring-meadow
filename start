@@ -2,15 +2,42 @@
 
 # Commented because ssid and password are hardcoded now
 #export DBUS_SYSTEM_BUS_ADDRESS=unix:path=/host/run/dbus/system_bus_socket
+# Trying to use resin-wifi-connect with example start script
+export DBUS_SYSTEM_BUS_ADDRESS=unix:path=/host/run/dbus/system_bus_socket
 #sleep ${START_SLEEP:-30} # Delay needed to avoid DBUS introspection errors
 
 #Hardcoded ssid e password no system-connection folder para MVP
 #Depois debugar porque o rasp0w não alterna os scripts e o rust rwc não funciona
 #node src/app.js --clear=false
 
-# To transfer the dev to the userspace dev
+# To transfer the dev to the userspace dev - não lembro o que isso faz
 udevd &
 udevadm trigger
+
+# Choose a condition for running WiFi Connect according to your use case:
+
+# 1. Is there a default gateway?
+# ip route | grep default
+
+# 2. Is there Internet connectivity?
+# nmcli -t g | grep full
+
+# 3. Is there Internet connectivity via a google ping?
+# wget --spider http://google.com 2>&1
+
+# 4. Is there an active WiFi connection?
+iwgetid -r
+
+if [ $? -eq 0 ]; then
+    printf 'Skipping WiFi Connect\n'
+else
+    printf 'Starting WiFi Connect\n'
+		# Aparentemenete ele chama ./wifi-connect se iwgtid -r retornar falso
+    ./wifi-connect
+fi
+
+# Start your application here.
+
 node acDevice.js
 
 while true; do
