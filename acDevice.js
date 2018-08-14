@@ -402,7 +402,7 @@ process.on('SIGTERM', shutdown);
 function shutdown() {
   pigpio.terminate();
   console.log('Limpando timers e pigpio pra finalizar...');
-  io.socket.disconnect();
+  //io.socket.disconnect();
   port.close(function () {
     console.log('port Closed.');
     process.exit(0);
