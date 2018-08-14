@@ -16,7 +16,7 @@ RUN curl https://api.github.com/repos/resin-io/resin-wifi-connect/releases/lates
     | xargs -n1 curl -Ls \
     | tar -xvz -C /usr/src/app/
 
-COPY resin-wifi-connect /usr/src/app/rwc
+COPY wifi-connect /usr/src/app/rwc
 
 RUN mkdir -p /usr/src/app/bcm2835-1.52
 
