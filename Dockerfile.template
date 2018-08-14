@@ -5,7 +5,7 @@ ENV DEVICE_TYPE=%%RESIN_MACHINE_NAME%%
 ENV INITSYSTEM on
 
 RUN apt-get update \
-	&& apt-get install -y dnsmasq wireless-tools \
+	&& apt-get install -y dnsmasq \
     pigpio \
 	&& rm -rf /var/lib/apt/lists/*
 
@@ -47,7 +47,7 @@ COPY --from=buildstep /usr/src/app/bcm2835-1.52 bcm2835-1.52
 COPY --from=buildstep /usr/src/app/ rwc
 
 RUN apt-get update \
-	&& apt-get install -y \
+	&& apt-get install -y wireless-tools \
 	   pigpio \
   && rm -rf /var/lib/apt/lists/*
 
