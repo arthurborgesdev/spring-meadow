@@ -8,6 +8,14 @@ Monitors and controlls the temperature and humidity when interfacing with a spli
 
 When the equipment is turned on, it is initiated with an balena/resin.io OS that loads the script responsbile to call the Node.js code. This code access the GPIO of Raspberry PI zero W (using a C library) communicating with the sensors.
 
+## Built With
+
+- JavaScript
+- Resin.io/Balena
+- Raspberry PI/Arduino
+- NodeJS
+- Ubuntu 20.04.3
+
 
 ## Main files and its functionalities
 
@@ -68,3 +76,35 @@ Contains the code that is called everytime that a button is pressed to set the w
 ## TODO (2021)
 
 * Translate the README.md to English.
+
+## Setup
+
+- Get the link of the repository: `git@github.com:arthurborgesdev/spring-meadow.git`
+- Clone it as `git@github.com:arthurborgesdev/spring-meadow.git` on a Terminal
+
+## Usage
+
+- This project is stored in a "Time Museum", not meant to be used by me again in a near future. However, it is a reference of how I used to program and think about software in 2018.
+
+
+## Author
+
+👤 **Arthur Borges**
+
+- GitHub: [@arthuborgesdev](https://github.com/arthurborgesdev)
+- Twitter: [@arthurmoises](https://twitter.com/arthurmoises)
+- LinkedIn: [Arthur Borges](https://linkedin.com/in/arthurmoises)
+
+
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome!
+
+## Show your support
+
+Give a ⭐️ if you like this project!
+
+## Acknowledgments
+
+- Support from Energizei Engenharia
+- Lots and lots of Stack Overflow questions and answers
