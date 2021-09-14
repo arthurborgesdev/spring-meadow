@@ -1,57 +1,70 @@
-# Spring-meadown (controlador de ar condicionado split)
+# Spring-meadown (Split air conditioner controller)
 
-## Pra que serve?
+## What it is for?
 
-Monitora e controla a temperatura e umidade do ambiente ao interfacear com um aparelho de ar condicionado split.
+Monitors and controlls the temperature and humidity when interfacing with a split air conditioner.
+
+## How it works?
+
+When the equipment is turned on, it is initiated with an balena/resin.io OS that loads the script responsbile to call the Node.js code. This code access the GPIO of Raspberry PI zero W (using a C library) communicating with the sensors.
 
 
-## Como funciona?
-
-Ao ligar o equipamento, o mesmo é iniciado com um SO balena/resin.io que inicializa o script responsável por chamar o código nodejs. O mesmo acessa as portas de entrada e saída do raspberry PI zero W (através de uma biblioteca C) se comunicando assim com os sensores. Ao
-
-
-## Arquivos principais e suas funções
+## Main files and its functionalities
 
 **/Dockerfile.template**
 
-Contém as instruçes para que seja montada a imagem docker, carregando as dependências da internet, rodando os scripts necessários para compor a aplicação, copiando os arquivos para suas respectivas pastas e iniciando o script inicial.
+Contains instructions to assemble the docker image, load dependencies from Internet, running the necessary scripts to compose the application, copying the files to their respective folder and initializing the start script.
+
 
 **/acDevice.js**
 
-Contém as principais funções da aplicação. Função para medir a temperatura e a umidade, função para coordenar o Arduino nano que está acoplado na porta serial, função para controlar o sensor PIR (detector de presença) e função para receber o código infravermelho do controle remoto.
+Contains the main functions of application. Function to measure temperature and humidity, function to coordinate the Arduino nano that is coupled to the serial port, function to control the PIR sensor (presence detector) and function to receive the infrared code from remote control.
+
 
 **/action.js**
 
-Contém as funções para acionar o aparelho de ar condicionado passando pelo Arduino Nano.
+Contains the functions to trigger the split air conditioner through the Arduino Nano.
+
 
 **/infrared.js**
 
-Contém as funções que controlam em baixo nível a comunicação com o Arduino Nano, a codificação do sinal do ar condicionado e a decodificação do mesmo.
+Contains the functions that control in low-level the communication with the Arduino Nano, the coding and decoding of the air conditioner signal.
+
 
 **/led_module.js**
 
-Contém funções para controlar o comportamento do LED.
+Contains functions to control the behavior of the LED.
+
 
 **/pir.js**
 
-Contém a função para controlar o funcionamento do sensor de presença (PIR).
+Contains functions to control the PIR sensor workings.
+
 
 **/socket-client.js**
 
-Contém o objeto de utilização de Sockets, da época em que ainda se utilizava Sails.js.
+Contains the object for using Sockets, from the time when Sails.JS where used.
+
 
 **/start**
 
-Inicializa o wifi-connect e depois a aplicação principal (acDevice.js)
+Initializes the wifi-connect and then the main application (acDevice.js)
+
 
 **/weather.js**
 
-Contém funções que fazem o tratamento das variáveis de temperatura e umidade, transformam os dados em objetos e os postam no servidor utilizando método POST.
+Contains functions that handle the variables of temperature and humidity, transform the data into objects and post it to the server using POST method.
+
 
 **/wifi.js**
 
-Contém o código que é invocado sempre que se aperta o botão para setar o wifi. O mesmo chama o arquivo chg-wifi.sh.
+Contains the code that is called everytime that a button is pressed to set the wifi. It calls the file chg-wifi.sh.
 
-## Coisas a fazer
 
-* Integrar o controlador com o web app para fazer a gravação dos códigos de ar condicionado.
+## TODO (2018)
+
+* Integrate the controller with the web app to make the storage of the split air conditioner codes.
+
+## TODO (2021)
+
+* Translate the README.md to English.
